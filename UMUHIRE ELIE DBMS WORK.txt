@@ -1,0 +1,436 @@
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 14
+Server version: 8.3.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> USE HUYE2
+Database changed
+mysql> SELECT * FROM STUDENT;
++------+-------+--------+-------+
+| ID   | NAMES | GENDER | MARKS |
++------+-------+--------+-------+
+|    1 | JOHN  | MALE   |    70 |
+|    3 | KEZA  | FEMALE |    50 |
+|    4 | ELIE  | MALE   |    70 |
+|    5 | JAYP  | MALE   |    80 |
+|    6 | JOY   | FEMALE |    40 |
+|    6 | JOY   | FEMALE |    40 |
++------+-------+--------+-------+
+6 rows in set (0.00 sec)
+
+mysql> USE CLASS
+Database changed
+mysql> SELECT * FROM STUDENT;
++-------+------------+--------+---------+------------+--------+-------------+-------+
+| REGNO | FNAME      | LNAME  | COURSES | DOB        | GENDER | NATIONALITY | LEVEL |
++-------+------------+--------+---------+------------+--------+-------------+-------+
+| 0     | UWIMPAYE   | Nadine | bbit    | 1990-02-02 | f      | Rwandan     | L1    |
+| 0     | NDAYISHIMI | David  | bit     | 1995-05-09 | m      | Rwandan     | NULL  |
+| 0     | NTIVUGURUZ | Jean   | bcs     | 1994-05-10 | m      | Rwandan     | NULL  |
++-------+------------+--------+---------+------------+--------+-------------+-------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT FNAME,COURSES,DOB FROM STUDENT;
++------------+---------+------------+
+| FNAME      | COURSES | DOB        |
++------------+---------+------------+
+| UWIMPAYE   | bbit    | 1990-02-02 |
+| NDAYISHIMI | bit     | 1995-05-09 |
+| NTIVUGURUZ | bcs     | 1994-05-10 |
++------------+---------+------------+
+3 rows in set (0.00 sec)
+
+mysql> ALTER TABLE STUDENT MODIFY REGNO VARCHAR(10);
+Query OK, 3 rows affected (0.08 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> UPDATE STUDENT SET REGNO='Bbi001' WHERE FNAME='UWIMPWYE';
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> UPDATE STUDENT SET REGNO='Bbi001' WHERE FNAME='UWIMPAYE';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE STUDENT SET REGNO='Bb002' WHERE FNAME='NDAYISHIMI';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE STUDENT SET REGNO='Bb003' WHERE FNAME='NTIVUGURUZ';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM STUDENT;
++--------+------------+--------+---------+------------+--------+-------------+-------+
+| REGNO  | FNAME      | LNAME  | COURSES | DOB        | GENDER | NATIONALITY | LEVEL |
++--------+------------+--------+---------+------------+--------+-------------+-------+
+| Bbi001 | UWIMPAYE   | Nadine | bbit    | 1990-02-02 | f      | Rwandan     | L1    |
+| Bb002  | NDAYISHIMI | David  | bit     | 1995-05-09 | m      | Rwandan     | NULL  |
+| Bb003  | NTIVUGURUZ | Jean   | bcs     | 1994-05-10 | m      | Rwandan     | NULL  |
++--------+------------+--------+---------+------------+--------+-------------+-------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT WHERE GENDER='M' OR NATIONALITY='RWANADAN';
++-------+------------+-------+---------+------------+--------+-------------+-------+
+| REGNO | FNAME      | LNAME | COURSES | DOB        | GENDER | NATIONALITY | LEVEL |
++-------+------------+-------+---------+------------+--------+-------------+-------+
+| Bb002 | NDAYISHIMI | David | bit     | 1995-05-09 | m      | Rwandan     | NULL  |
+| Bb003 | NTIVUGURUZ | Jean  | bcs     | 1994-05-10 | m      | Rwandan     | NULL  |
++-------+------------+-------+---------+------------+--------+-------------+-------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM STUDENT;
++--------+------------+--------+---------+------------+--------+-------------+-------+
+| REGNO  | FNAME      | LNAME  | COURSES | DOB        | GENDER | NATIONALITY | LEVEL |
++--------+------------+--------+---------+------------+--------+-------------+-------+
+| Bbi001 | UWIMPAYE   | Nadine | bbit    | 1990-02-02 | f      | Rwandan     | L1    |
+| Bb002  | NDAYISHIMI | David  | bit     | 1995-05-09 | m      | Rwandan     | NULL  |
+| Bb003  | NTIVUGURUZ | Jean   | bcs     | 1994-05-10 | m      | Rwandan     | NULL  |
++--------+------------+--------+---------+------------+--------+-------------+-------+
+3 rows in set (0.00 sec)
+
+mysql> INSERT INTO STUDENT('Bb004','KEZA','Anne','bsss','1990-02-09','RWANDAN','L3');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''Bb004','KEZA','Anne','bsss','1990-02-09','RWANDAN','L3')' at line 1
+mysql> INSERT INTO STUDENT VALUES('Bb004','KEZA','Anne','bsss','1990-02-09','RWANDAN','L3');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> INSERT INTO STUDENT VALUES('Bb004','KEZA','Anne','bsss','1990-02-09','f','RWANDAN','L3');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from student;
++--------+------------+--------+---------+------------+--------+-------------+-------+
+| REGNO  | FNAME      | LNAME  | COURSES | DOB        | GENDER | NATIONALITY | LEVEL |
++--------+------------+--------+---------+------------+--------+-------------+-------+
+| Bbi001 | UWIMPAYE   | Nadine | bbit    | 1990-02-02 | f      | Rwandan     | L1    |
+| Bb002  | NDAYISHIMI | David  | bit     | 1995-05-09 | m      | Rwandan     | NULL  |
+| Bb003  | NTIVUGURUZ | Jean   | bcs     | 1994-05-10 | m      | Rwandan     | NULL  |
+| Bb004  | KEZA       | Anne   | bsss    | 1990-02-09 | f      | RWANDAN     | L3    |
++--------+------------+--------+---------+------------+--------+-------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> UPDATE STUDENT NATIONALITY='TANZANIA' WHERE GENDER='m';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '='TANZANIA' WHERE GENDER='m'' at line 1
+mysql> UPDATE STUDENT SET NATIONALITY='TANZANIA' WHERE GENDER='m';
+Query OK, 2 rows affected (0.00 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> SELECT * FROM STUDENT;
++--------+------------+--------+---------+------------+--------+-------------+-------+
+| REGNO  | FNAME      | LNAME  | COURSES | DOB        | GENDER | NATIONALITY | LEVEL |
++--------+------------+--------+---------+------------+--------+-------------+-------+
+| Bbi001 | UWIMPAYE   | Nadine | bbit    | 1990-02-02 | f      | Rwandan     | L1    |
+| Bb002  | NDAYISHIMI | David  | bit     | 1995-05-09 | m      | TANZANIA    | NULL  |
+| Bb003  | NTIVUGURUZ | Jean   | bcs     | 1994-05-10 | m      | TANZANIA    | NULL  |
+| Bb004  | KEZA       | Anne   | bsss    | 1990-02-09 | f      | RWANDAN     | L3    |
++--------+------------+--------+---------+------------+--------+-------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> CREATE DATABASE RUHANDE;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> USE RUHANDE;
+Database changed
+mysql> CREATE TABLE NGOMA(ID INT(20),FNAME CHAR(20),LNAME CHAR(20),PROVINCE CHAR(20),DISTRICT CHAR(20),SECTOR CHAR(10),CELL CHAR(10),EMAIL VARCHAR(20),TEL INT(20));
+Query OK, 0 rows affected, 2 warnings (0.02 sec)
+
+mysql> INSERT INTO NGOMA VALUES('01','KEZA','Anne','Southern','Huye','Tumba','anne@02gmail.com','07822223739');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> INSERT INTO NGOMA VALUES('01','KEZA','Anne','Southern','Huye','Tumba','Cyarwa','anne@02gmail.com','07822223739');
+Query OK, 1 row affected, 1 warning (0.00 sec)
+
+mysql> INSERT INTO NGOMA VALUES('02','UMWIZA','Joy','southern','Huye',
+    -> INSERT INTO NGOMA VALUES('02','UMWIZA','Joy','Southern','Huye','Tumba','Cyarwa','joyu08@gmail.co','07838383838');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'INTO NGOMA VALUES('02','UMWIZA','Joy','Southern','Huye','Tumba','Cyarwa','joyu08' at line 2
+mysql> INSERT INTO NGOMA VALUES('02','UMWIZA','Joy','Southern','Huye','Tumba','Cyarwa','joyu08@gmail.com','07838383838');
+Query OK, 1 row affected, 1 warning (0.00 sec)
+
+mysql> INSERT INTO NGOMA VALUES('03','MUSA','Jaque','Southern','Huye','Tumba','Cyarwa','musa02@gmail.com','07744833333');
+Query OK, 1 row affected, 1 warning (0.00 sec)
+
+mysql> INSERT INTO NGOMA VALUES('04','ENZO','Mark','Southern','Huye','Tumba','Cyarwa','enzo20@gmail.com','03778383893');
+Query OK, 1 row affected, 1 warning (0.00 sec)
+
+mysql> INSERT INTO NGOMA VALUES('05','MUGISHA','Fred','Southern','Huye','Tumba','Cyarwa','mug37@gmail.com','0847847433');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO NGOMA VALUES('06','MURENZI','Petre','Southern','Huye','Tumba','Cyarwa','murenz5@gmail.com','07683636363');
+Query OK, 1 row affected, 1 warning (0.00 sec)
+
+mysql> INSERT INTO NGOMA VALUES('07','TETA','Bety','Southern','Huye','Tumba','Cyarwa','teta387gmail.com','03847444444');
+Query OK, 1 row affected, 1 warning (0.00 sec)
+
+mysql> INSRET INTO NGOMA VALUES('08','MUGABE','Enzo','Southern','Tumba','Cyarwa','muga2@gmail.com','94847373733');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'INSRET INTO NGOMA VALUES('08','MUGABE','Enzo','Southern','Tumba','Cyarwa','muga2' at line 1
+mysql> INSRET INTO NGOMA VALUES('08','MUGABE','Enzo','Southern','Huye','Tumba','Cyarwa','muga2@gmail.com','94847373733');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'INSRET INTO NGOMA VALUES('08','MUGABE','Enzo','Southern','Huye','Tumba','Cyarwa'' at line 1
+mysql> INSERT INTO NGOMA VALUES('08','MUGABE','Enzo','Southern','Huye','Tumba','Cyarwa','muga2@gmail.com','94847373733');
+Query OK, 1 row affected, 1 warning (0.00 sec)
+
+mysql> INSERT INTO NGOMA VALUES('09','RUGIRA','Teo','Southern','Huye','Tumba','Cyarwa','rug27@gmail.com','07747484844');
+Query OK, 1 row affected, 1 warning (0.00 sec)
+
+mysql> INSERT INTO NGOMA VALUES('10','GIHOZO','Mercy','Southern','Huye','Tumba','Cyarwa','merc4@gmail.com','83474646546');
+Query OK, 1 row affected, 1 warning (0.00 sec)
+
+mysql> SELECT * FROM NGOMA;
++------+---------+-------+----------+----------+--------+--------+-------------------+------------+
+| ID   | FNAME   | LNAME | PROVINCE | DISTRICT | SECTOR | CELL   | EMAIL             | TEL        |
++------+---------+-------+----------+----------+--------+--------+-------------------+------------+
+|    1 | KEZA    | Anne  | Southern | Huye     | Tumba  | Cyarwa | anne@02gmail.com  | 2147483647 |
+|    2 | UMWIZA  | Joy   | Southern | Huye     | Tumba  | Cyarwa | joyu08@gmail.com  | 2147483647 |
+|    3 | MUSA    | Jaque | Southern | Huye     | Tumba  | Cyarwa | musa02@gmail.com  | 2147483647 |
+|    4 | ENZO    | Mark  | Southern | Huye     | Tumba  | Cyarwa | enzo20@gmail.com  | 2147483647 |
+|    5 | MUGISHA | Fred  | Southern | Huye     | Tumba  | Cyarwa | mug37@gmail.com   |  847847433 |
+|    6 | MURENZI | Petre | Southern | Huye     | Tumba  | Cyarwa | murenz5@gmail.com | 2147483647 |
+|    7 | TETA    | Bety  | Southern | Huye     | Tumba  | Cyarwa | teta387gmail.com  | 2147483647 |
+|    8 | MUGABE  | Enzo  | Southern | Huye     | Tumba  | Cyarwa | muga2@gmail.com   | 2147483647 |
+|    9 | RUGIRA  | Teo   | Southern | Huye     | Tumba  | Cyarwa | rug27@gmail.com   | 2147483647 |
+|   10 | GIHOZO  | Mercy | Southern | Huye     | Tumba  | Cyarwa | merc4@gmail.com   | 2147483647 |
++------+---------+-------+----------+----------+--------+--------+-------------------+------------+
+10 rows in set (0.00 sec)
+
+mysql> ALTER TABLE NGOMA ADD COLUMN MARTUAL STATUS CHAR(10);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'STATUS CHAR(10)' at line 1
+mysql> ALTER TABLE NGOMA ADD COLUMN MARTUALSTATUS CHAR(10);
+Query OK, 10 rows affected (0.06 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM NGOMA;
++------+---------+-------+----------+----------+--------+--------+-------------------+------------+---------------+
+| ID   | FNAME   | LNAME | PROVINCE | DISTRICT | SECTOR | CELL   | EMAIL             | TEL        | MARTUALSTATUS |
++------+---------+-------+----------+----------+--------+--------+-------------------+------------+---------------+
+|    1 | KEZA    | Anne  | Southern | Huye     | Tumba  | Cyarwa | anne@02gmail.com  | 2147483647 | NULL          |
+|    2 | UMWIZA  | Joy   | Southern | Huye     | Tumba  | Cyarwa | joyu08@gmail.com  | 2147483647 | NULL          |
+|    3 | MUSA    | Jaque | Southern | Huye     | Tumba  | Cyarwa | musa02@gmail.com  | 2147483647 | NULL          |
+|    4 | ENZO    | Mark  | Southern | Huye     | Tumba  | Cyarwa | enzo20@gmail.com  | 2147483647 | NULL          |
+|    5 | MUGISHA | Fred  | Southern | Huye     | Tumba  | Cyarwa | mug37@gmail.com   |  847847433 | NULL          |
+|    6 | MURENZI | Petre | Southern | Huye     | Tumba  | Cyarwa | murenz5@gmail.com | 2147483647 | NULL          |
+|    7 | TETA    | Bety  | Southern | Huye     | Tumba  | Cyarwa | teta387gmail.com  | 2147483647 | NULL          |
+|    8 | MUGABE  | Enzo  | Southern | Huye     | Tumba  | Cyarwa | muga2@gmail.com   | 2147483647 | NULL          |
+|    9 | RUGIRA  | Teo   | Southern | Huye     | Tumba  | Cyarwa | rug27@gmail.com   | 2147483647 | NULL          |
+|   10 | GIHOZO  | Mercy | Southern | Huye     | Tumba  | Cyarwa | merc4@gmail.com   | 2147483647 | NULL          |
++------+---------+-------+----------+----------+--------+--------+-------------------+------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT * FROM NGOMA WHERE DISTRICT='Huye' OR Cell='Cyarwa';
++------+---------+-------+----------+----------+--------+--------+-------------------+------------+---------------+
+| ID   | FNAME   | LNAME | PROVINCE | DISTRICT | SECTOR | CELL   | EMAIL             | TEL        | MARTUALSTATUS |
++------+---------+-------+----------+----------+--------+--------+-------------------+------------+---------------+
+|    1 | KEZA    | Anne  | Southern | Huye     | Tumba  | Cyarwa | anne@02gmail.com  | 2147483647 | NULL          |
+|    2 | UMWIZA  | Joy   | Southern | Huye     | Tumba  | Cyarwa | joyu08@gmail.com  | 2147483647 | NULL          |
+|    3 | MUSA    | Jaque | Southern | Huye     | Tumba  | Cyarwa | musa02@gmail.com  | 2147483647 | NULL          |
+|    4 | ENZO    | Mark  | Southern | Huye     | Tumba  | Cyarwa | enzo20@gmail.com  | 2147483647 | NULL          |
+|    5 | MUGISHA | Fred  | Southern | Huye     | Tumba  | Cyarwa | mug37@gmail.com   |  847847433 | NULL          |
+|    6 | MURENZI | Petre | Southern | Huye     | Tumba  | Cyarwa | murenz5@gmail.com | 2147483647 | NULL          |
+|    7 | TETA    | Bety  | Southern | Huye     | Tumba  | Cyarwa | teta387gmail.com  | 2147483647 | NULL          |
+|    8 | MUGABE  | Enzo  | Southern | Huye     | Tumba  | Cyarwa | muga2@gmail.com   | 2147483647 | NULL          |
+|    9 | RUGIRA  | Teo   | Southern | Huye     | Tumba  | Cyarwa | rug27@gmail.com   | 2147483647 | NULL          |
+|   10 | GIHOZO  | Mercy | Southern | Huye     | Tumba  | Cyarwa | merc4@gmail.com   | 2147483647 | NULL          |
++------+---------+-------+----------+----------+--------+--------+-------------------+------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT * FROM NGOMA WHERE ID='6' OR SECTOR='Tumba';
++------+---------+-------+----------+----------+--------+--------+-------------------+------------+---------------+
+| ID   | FNAME   | LNAME | PROVINCE | DISTRICT | SECTOR | CELL   | EMAIL             | TEL        | MARTUALSTATUS |
++------+---------+-------+----------+----------+--------+--------+-------------------+------------+---------------+
+|    1 | KEZA    | Anne  | Southern | Huye     | Tumba  | Cyarwa | anne@02gmail.com  | 2147483647 | NULL          |
+|    2 | UMWIZA  | Joy   | Southern | Huye     | Tumba  | Cyarwa | joyu08@gmail.com  | 2147483647 | NULL          |
+|    3 | MUSA    | Jaque | Southern | Huye     | Tumba  | Cyarwa | musa02@gmail.com  | 2147483647 | NULL          |
+|    4 | ENZO    | Mark  | Southern | Huye     | Tumba  | Cyarwa | enzo20@gmail.com  | 2147483647 | NULL          |
+|    5 | MUGISHA | Fred  | Southern | Huye     | Tumba  | Cyarwa | mug37@gmail.com   |  847847433 | NULL          |
+|    6 | MURENZI | Petre | Southern | Huye     | Tumba  | Cyarwa | murenz5@gmail.com | 2147483647 | NULL          |
+|    7 | TETA    | Bety  | Southern | Huye     | Tumba  | Cyarwa | teta387gmail.com  | 2147483647 | NULL          |
+|    8 | MUGABE  | Enzo  | Southern | Huye     | Tumba  | Cyarwa | muga2@gmail.com   | 2147483647 | NULL          |
+|    9 | RUGIRA  | Teo   | Southern | Huye     | Tumba  | Cyarwa | rug27@gmail.com   | 2147483647 | NULL          |
+|   10 | GIHOZO  | Mercy | Southern | Huye     | Tumba  | Cyarwa | merc4@gmail.com   | 2147483647 | NULL          |
++------+---------+-------+----------+----------+--------+--------+-------------------+------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> UPDATE NGOMA SET ID='22' WHERE FNAME='Joy';
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> SELECT * FROM NGOMA;
++------+---------+-------+----------+----------+--------+--------+-------------------+------------+---------------+
+| ID   | FNAME   | LNAME | PROVINCE | DISTRICT | SECTOR | CELL   | EMAIL             | TEL        | MARTUALSTATUS |
++------+---------+-------+----------+----------+--------+--------+-------------------+------------+---------------+
+|    1 | KEZA    | Anne  | Southern | Huye     | Tumba  | Cyarwa | anne@02gmail.com  | 2147483647 | NULL          |
+|    2 | UMWIZA  | Joy   | Southern | Huye     | Tumba  | Cyarwa | joyu08@gmail.com  | 2147483647 | NULL          |
+|    3 | MUSA    | Jaque | Southern | Huye     | Tumba  | Cyarwa | musa02@gmail.com  | 2147483647 | NULL          |
+|    4 | ENZO    | Mark  | Southern | Huye     | Tumba  | Cyarwa | enzo20@gmail.com  | 2147483647 | NULL          |
+|    5 | MUGISHA | Fred  | Southern | Huye     | Tumba  | Cyarwa | mug37@gmail.com   |  847847433 | NULL          |
+|    6 | MURENZI | Petre | Southern | Huye     | Tumba  | Cyarwa | murenz5@gmail.com | 2147483647 | NULL          |
+|    7 | TETA    | Bety  | Southern | Huye     | Tumba  | Cyarwa | teta387gmail.com  | 2147483647 | NULL          |
+|    8 | MUGABE  | Enzo  | Southern | Huye     | Tumba  | Cyarwa | muga2@gmail.com   | 2147483647 | NULL          |
+|    9 | RUGIRA  | Teo   | Southern | Huye     | Tumba  | Cyarwa | rug27@gmail.com   | 2147483647 | NULL          |
+|   10 | GIHOZO  | Mercy | Southern | Huye     | Tumba  | Cyarwa | merc4@gmail.com   | 2147483647 | NULL          |
++------+---------+-------+----------+----------+--------+--------+-------------------+------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> UPDATE NGOMA SET ID='22' WHERE LNAME='Joy';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *  from ngoma;
++------+---------+-------+----------+----------+--------+--------+-------------------+------------+---------------+
+| ID   | FNAME   | LNAME | PROVINCE | DISTRICT | SECTOR | CELL   | EMAIL             | TEL        | MARTUALSTATUS |
++------+---------+-------+----------+----------+--------+--------+-------------------+------------+---------------+
+|    1 | KEZA    | Anne  | Southern | Huye     | Tumba  | Cyarwa | anne@02gmail.com  | 2147483647 | NULL          |
+|   22 | UMWIZA  | Joy   | Southern | Huye     | Tumba  | Cyarwa | joyu08@gmail.com  | 2147483647 | NULL          |
+|    3 | MUSA    | Jaque | Southern | Huye     | Tumba  | Cyarwa | musa02@gmail.com  | 2147483647 | NULL          |
+|    4 | ENZO    | Mark  | Southern | Huye     | Tumba  | Cyarwa | enzo20@gmail.com  | 2147483647 | NULL          |
+|    5 | MUGISHA | Fred  | Southern | Huye     | Tumba  | Cyarwa | mug37@gmail.com   |  847847433 | NULL          |
+|    6 | MURENZI | Petre | Southern | Huye     | Tumba  | Cyarwa | murenz5@gmail.com | 2147483647 | NULL          |
+|    7 | TETA    | Bety  | Southern | Huye     | Tumba  | Cyarwa | teta387gmail.com  | 2147483647 | NULL          |
+|    8 | MUGABE  | Enzo  | Southern | Huye     | Tumba  | Cyarwa | muga2@gmail.com   | 2147483647 | NULL          |
+|    9 | RUGIRA  | Teo   | Southern | Huye     | Tumba  | Cyarwa | rug27@gmail.com   | 2147483647 | NULL          |
+|   10 | GIHOZO  | Mercy | Southern | Huye     | Tumba  | Cyarwa | merc4@gmail.com   | 2147483647 | NULL          |
++------+---------+-------+----------+----------+--------+--------+-------------------+------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT FNAME,SECTOR,TELFROM NGOMA;
+ERROR 1054 (42S22): Unknown column 'FNAME' in 'field list'
+mysql> SELECT FNAME,SECTOR,TELFROM FROM NGOMA;
+ERROR 1054 (42S22): Unknown column 'TELFROM' in 'field list'
+mysql> SELECT FNAME,SECTOR,TEL FROM NGOMA;
++---------+--------+------------+
+| FNAME   | SECTOR | TEL        |
++---------+--------+------------+
+| KEZA    | Tumba  | 2147483647 |
+| UMWIZA  | Tumba  | 2147483647 |
+| MUSA    | Tumba  | 2147483647 |
+| ENZO    | Tumba  | 2147483647 |
+| MUGISHA | Tumba  |  847847433 |
+| MURENZI | Tumba  | 2147483647 |
+| TETA    | Tumba  | 2147483647 |
+| MUGABE  | Tumba  | 2147483647 |
+| RUGIRA  | Tumba  | 2147483647 |
+| GIHOZO  | Tumba  | 2147483647 |
++---------+--------+------------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT * FROM NGOMA;
++------+---------+-------+----------+----------+--------+--------+-------------------+------------+---------------+
+| ID   | FNAME   | LNAME | PROVINCE | DISTRICT | SECTOR | CELL   | EMAIL             | TEL        | MARTUALSTATUS |
++------+---------+-------+----------+----------+--------+--------+-------------------+------------+---------------+
+|    1 | KEZA    | Anne  | Southern | Huye     | Tumba  | Cyarwa | anne@02gmail.com  | 2147483647 | NULL          |
+|   22 | UMWIZA  | Joy   | Southern | Huye     | Tumba  | Cyarwa | joyu08@gmail.com  | 2147483647 | NULL          |
+|    3 | MUSA    | Jaque | Southern | Huye     | Tumba  | Cyarwa | musa02@gmail.com  | 2147483647 | NULL          |
+|    4 | ENZO    | Mark  | Southern | Huye     | Tumba  | Cyarwa | enzo20@gmail.com  | 2147483647 | NULL          |
+|    5 | MUGISHA | Fred  | Southern | Huye     | Tumba  | Cyarwa | mug37@gmail.com   |  847847433 | NULL          |
+|    6 | MURENZI | Petre | Southern | Huye     | Tumba  | Cyarwa | murenz5@gmail.com | 2147483647 | NULL          |
+|    7 | TETA    | Bety  | Southern | Huye     | Tumba  | Cyarwa | teta387gmail.com  | 2147483647 | NULL          |
+|    8 | MUGABE  | Enzo  | Southern | Huye     | Tumba  | Cyarwa | muga2@gmail.com   | 2147483647 | NULL          |
+|    9 | RUGIRA  | Teo   | Southern | Huye     | Tumba  | Cyarwa | rug27@gmail.com   | 2147483647 | NULL          |
+|   10 | GIHOZO  | Mercy | Southern | Huye     | Tumba  | Cyarwa | merc4@gmail.com   | 2147483647 | NULL          |
++------+---------+-------+----------+----------+--------+--------+-------------------+------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> UPDATE NGOMA SET MARTUALSTATUS='Married' WHERE SECTEO='Tumba';
+ERROR 1054 (42S22): Unknown column 'SECTEO' in 'where clause'
+mysql> UPDATE NGOMA SET MARTUALSTATUS='Married' WHERE SECTOR='Tumba';
+Query OK, 10 rows affected (0.00 sec)
+Rows matched: 10  Changed: 10  Warnings: 0
+
+mysql> SELECT * FROM NGOMA;
++------+---------+-------+----------+----------+--------+--------+-------------------+------------+---------------+
+| ID   | FNAME   | LNAME | PROVINCE | DISTRICT | SECTOR | CELL   | EMAIL             | TEL        | MARTUALSTATUS |
++------+---------+-------+----------+----------+--------+--------+-------------------+------------+---------------+
+|    1 | KEZA    | Anne  | Southern | Huye     | Tumba  | Cyarwa | anne@02gmail.com  | 2147483647 | Married       |
+|   22 | UMWIZA  | Joy   | Southern | Huye     | Tumba  | Cyarwa | joyu08@gmail.com  | 2147483647 | Married       |
+|    3 | MUSA    | Jaque | Southern | Huye     | Tumba  | Cyarwa | musa02@gmail.com  | 2147483647 | Married       |
+|    4 | ENZO    | Mark  | Southern | Huye     | Tumba  | Cyarwa | enzo20@gmail.com  | 2147483647 | Married       |
+|    5 | MUGISHA | Fred  | Southern | Huye     | Tumba  | Cyarwa | mug37@gmail.com   |  847847433 | Married       |
+|    6 | MURENZI | Petre | Southern | Huye     | Tumba  | Cyarwa | murenz5@gmail.com | 2147483647 | Married       |
+|    7 | TETA    | Bety  | Southern | Huye     | Tumba  | Cyarwa | teta387gmail.com  | 2147483647 | Married       |
+|    8 | MUGABE  | Enzo  | Southern | Huye     | Tumba  | Cyarwa | muga2@gmail.com   | 2147483647 | Married       |
+|    9 | RUGIRA  | Teo   | Southern | Huye     | Tumba  | Cyarwa | rug27@gmail.com   | 2147483647 | Married       |
+|   10 | GIHOZO  | Mercy | Southern | Huye     | Tumba  | Cyarwa | merc4@gmail.com   | 2147483647 | Married       |
++------+---------+-------+----------+----------+--------+--------+-------------------+------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> UPDATE NGOMA SET MARTUALSTATUS='Single' WHERE ID='1';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM NGOMA;
++------+---------+-------+----------+----------+--------+--------+-------------------+------------+---------------+
+| ID   | FNAME   | LNAME | PROVINCE | DISTRICT | SECTOR | CELL   | EMAIL             | TEL        | MARTUALSTATUS |
++------+---------+-------+----------+----------+--------+--------+-------------------+------------+---------------+
+|    1 | KEZA    | Anne  | Southern | Huye     | Tumba  | Cyarwa | anne@02gmail.com  | 2147483647 | Single        |
+|   22 | UMWIZA  | Joy   | Southern | Huye     | Tumba  | Cyarwa | joyu08@gmail.com  | 2147483647 | Married       |
+|    3 | MUSA    | Jaque | Southern | Huye     | Tumba  | Cyarwa | musa02@gmail.com  | 2147483647 | Married       |
+|    4 | ENZO    | Mark  | Southern | Huye     | Tumba  | Cyarwa | enzo20@gmail.com  | 2147483647 | Married       |
+|    5 | MUGISHA | Fred  | Southern | Huye     | Tumba  | Cyarwa | mug37@gmail.com   |  847847433 | Married       |
+|    6 | MURENZI | Petre | Southern | Huye     | Tumba  | Cyarwa | murenz5@gmail.com | 2147483647 | Married       |
+|    7 | TETA    | Bety  | Southern | Huye     | Tumba  | Cyarwa | teta387gmail.com  | 2147483647 | Married       |
+|    8 | MUGABE  | Enzo  | Southern | Huye     | Tumba  | Cyarwa | muga2@gmail.com   | 2147483647 | Married       |
+|    9 | RUGIRA  | Teo   | Southern | Huye     | Tumba  | Cyarwa | rug27@gmail.com   | 2147483647 | Married       |
+|   10 | GIHOZO  | Mercy | Southern | Huye     | Tumba  | Cyarwa | merc4@gmail.com   | 2147483647 | Married       |
++------+---------+-------+----------+----------+--------+--------+-------------------+------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> UPDATE NGOMA SET ID='43' WHERE FNAME='TETA';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM NGOMA;
++------+---------+-------+----------+----------+--------+--------+-------------------+------------+---------------+
+| ID   | FNAME   | LNAME | PROVINCE | DISTRICT | SECTOR | CELL   | EMAIL             | TEL        | MARTUALSTATUS |
++------+---------+-------+----------+----------+--------+--------+-------------------+------------+---------------+
+|    1 | KEZA    | Anne  | Southern | Huye     | Tumba  | Cyarwa | anne@02gmail.com  | 2147483647 | Single        |
+|   22 | UMWIZA  | Joy   | Southern | Huye     | Tumba  | Cyarwa | joyu08@gmail.com  | 2147483647 | Married       |
+|    3 | MUSA    | Jaque | Southern | Huye     | Tumba  | Cyarwa | musa02@gmail.com  | 2147483647 | Married       |
+|    4 | ENZO    | Mark  | Southern | Huye     | Tumba  | Cyarwa | enzo20@gmail.com  | 2147483647 | Married       |
+|    5 | MUGISHA | Fred  | Southern | Huye     | Tumba  | Cyarwa | mug37@gmail.com   |  847847433 | Married       |
+|    6 | MURENZI | Petre | Southern | Huye     | Tumba  | Cyarwa | murenz5@gmail.com | 2147483647 | Married       |
+|   43 | TETA    | Bety  | Southern | Huye     | Tumba  | Cyarwa | teta387gmail.com  | 2147483647 | Married       |
+|    8 | MUGABE  | Enzo  | Southern | Huye     | Tumba  | Cyarwa | muga2@gmail.com   | 2147483647 | Married       |
+|    9 | RUGIRA  | Teo   | Southern | Huye     | Tumba  | Cyarwa | rug27@gmail.com   | 2147483647 | Married       |
+|   10 | GIHOZO  | Mercy | Southern | Huye     | Tumba  | Cyarwa | merc4@gmail.com   | 2147483647 | Married       |
++------+---------+-------+----------+----------+--------+--------+-------------------+------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> UPDATE NGOMA MARTUAlSTATUS='Single' where ID='10';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '='Single' where ID='10'' at line 1
+mysql> UPDATE NGOMA SET MARTUAlSTATUS='Single' where ID='10';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM NGOMA;
++------+---------+-------+----------+----------+--------+--------+-------------------+------------+---------------+
+| ID   | FNAME   | LNAME | PROVINCE | DISTRICT | SECTOR | CELL   | EMAIL             | TEL        | MARTUALSTATUS |
++------+---------+-------+----------+----------+--------+--------+-------------------+------------+---------------+
+|    1 | KEZA    | Anne  | Southern | Huye     | Tumba  | Cyarwa | anne@02gmail.com  | 2147483647 | Single        |
+|   22 | UMWIZA  | Joy   | Southern | Huye     | Tumba  | Cyarwa | joyu08@gmail.com  | 2147483647 | Married       |
+|    3 | MUSA    | Jaque | Southern | Huye     | Tumba  | Cyarwa | musa02@gmail.com  | 2147483647 | Married       |
+|    4 | ENZO    | Mark  | Southern | Huye     | Tumba  | Cyarwa | enzo20@gmail.com  | 2147483647 | Married       |
+|    5 | MUGISHA | Fred  | Southern | Huye     | Tumba  | Cyarwa | mug37@gmail.com   |  847847433 | Married       |
+|    6 | MURENZI | Petre | Southern | Huye     | Tumba  | Cyarwa | murenz5@gmail.com | 2147483647 | Married       |
+|   43 | TETA    | Bety  | Southern | Huye     | Tumba  | Cyarwa | teta387gmail.com  | 2147483647 | Married       |
+|    8 | MUGABE  | Enzo  | Southern | Huye     | Tumba  | Cyarwa | muga2@gmail.com   | 2147483647 | Married       |
+|    9 | RUGIRA  | Teo   | Southern | Huye     | Tumba  | Cyarwa | rug27@gmail.com   | 2147483647 | Married       |
+|   10 | GIHOZO  | Mercy | Southern | Huye     | Tumba  | Cyarwa | merc4@gmail.com   | 2147483647 | Single        |
++------+---------+-------+----------+----------+--------+--------+-------------------+------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT * FROM NGOMA WHERE MARTUALSTATUS='Single,;
+    '> SELECT * FROM NGOMA WHERE SECTOR='Huye'OR MARTUALSTATUS='Single,;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Huye'OR MARTUALSTATUS='Single,' at line 2
+mysql> SELECT * FROM NGOMA WHERE SECTOR='Tumba' OR MARTUALSTATUS='Single,;
+    '> SELECT * FROM NGOMA;
+    '>
+    '> SELECT * FROM NGOMA WHERE SECTOR='Tumba' OR MARTUALSTATUS='Single';
+    '> SELECT * FROM NGOMA;
+    '> SELECT * FROM NGOMA;
+    '> SELECT * FROM NGOMA WHERE SECTOR='Tumba' OR MARTUALSTATUS='Single';
+    '> SELECT * FROM NGOMA WHERE SECTOR='Tumba' OR MARTUALSTATUS='Single';
+    '> mysql> SELECT * FROM NGOMA;
+    '> SELECT * FROM NGOMA WHERE SECTOR='Tumba' OR MARTUALSTATUS='Single';
